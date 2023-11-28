@@ -1,6 +1,6 @@
 import torchvision
+from algorithm_factory.factory import ObjectDetector
 from PIL import Image
-from src.algorithm_factory.factory import ObjectDetector
 
 if __name__ == "__main__":
     image = Image.open("test/test-image.jpg")
