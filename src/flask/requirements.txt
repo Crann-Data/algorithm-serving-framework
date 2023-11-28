@@ -1,0 +1,7 @@
+flask
+uwsgi
+numpy
+flask-restful
+onnx
+onnxruntime
+pillow
