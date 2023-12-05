@@ -1,7 +1,5 @@
-flask
-uwsgi
+django
 numpy
-flask-restful
 onnx
 onnxruntime
 pillow

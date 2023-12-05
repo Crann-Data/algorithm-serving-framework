@@ -1,9 +1,6 @@
 import logging
 
 from algorithm_inference.inference import ObjectDetector
-from flask_restful import Api, Resource
-
-from flask import Flask, Response, request
 
 logging.basicConfig(format='%(levelname)s:%(asctime)s:%(funcName)s:%(message)s', level=logging.INFO)
 
