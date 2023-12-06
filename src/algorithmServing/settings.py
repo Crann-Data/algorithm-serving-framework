@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "algorithms.apps.AlgorithmsConfig",
+    "rest_framework",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -130,3 +131,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 DIRNAME = os.path.dirname(__file__)
 MEDIA_ROOT = "assets"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}

@@ -1,6 +1,10 @@
 django
+psycopg[binary]
+
+djangorestframework
+markdown
+
 numpy
 onnx
 onnxruntime
 pillow
-psycopg[binary]
