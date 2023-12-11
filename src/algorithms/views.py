@@ -1,22 +1,20 @@
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseBadRequest, FileResponse
-from django.shortcuts import render
-from django.http import Http404
-from django.urls import reverse
-from django.core.files import File
-from django.utils import timezone
-
-from rest_framework import  viewsets
-from rest_framework.decorators import api_view, authentication_classes, permission_classes
-from rest_framework import status
-from rest_framework.response import Response
-
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from django.contrib.auth.models import User
+from django.core.files import File
+from django.http import (FileResponse, Http404, HttpResponse,
+                         HttpResponseBadRequest, HttpResponseRedirect)
+from django.shortcuts import render
+from django.urls import reverse
+from django.utils import timezone
+from rest_framework import status, viewsets
+from rest_framework.authentication import (BasicAuthentication,
+                                           SessionAuthentication)
+from rest_framework.decorators import (api_view, authentication_classes,
+                                       permission_classes)
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.response import Response
 
 from .models import Algorithm
 from .serializers import AlgorithmSerializer
-
 
 # Create your views here.
 
@@ -57,7 +55,7 @@ def upload_algorithm(request):
         if not "file" in request.FILES:
             return Response({"data": "No file given"}, status=status.HTTP_400_BAD_REQUEST)
         file = File(request.FILES["file"])
-        serialized_algo = AlgorithmSerializer(data={"name": file.name, "creation_date":timezone.now(), "algorithm_file":file, "owner": User.objects.get(id=request.user.id)})
+        serialized_algo = AlgorithmSerializer(data={"name": file.name, "creation_date":timezone.now(), "algorithm_file":file, "owner": request.user.id})
         if serialized_algo.is_valid():
             serialized_algo.save()
             return Response({"data": f"file submitted: {serialized_algo.data}"},status=status.HTTP_201_CREATED)
