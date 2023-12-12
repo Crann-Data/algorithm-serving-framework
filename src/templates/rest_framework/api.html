@@ -1,0 +1,28 @@
+{% extends "rest_framework/base.html" %}
+{% load i18n %}
+{% load static %}
+{% load rest_framework %}
+
+{% block bootstrap_theme %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.3.1/dist/flatly/bootstrap.css" type="text/css">
+{% endblock %}
+
+
+{% block branding %}
+    <a class='navbar-brand' rel="nofollow" href='/'>
+        Algorithms
+    </a>
+{% endblock %}
+
+{% block userlinks %}
+                {% if user.is_authenticated %}
+                    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">{% translate "Log out" %}</button>
+                    </form>
+                {% else %}
+                  {% optional_login request %}
+                {% endif %}
+              {% endblock %}
+
+{% block bootstrap_navbar_variant %}bg-primary" data-bs-theme="dark{% endblock %}
