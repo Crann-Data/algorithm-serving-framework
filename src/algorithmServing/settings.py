@@ -33,7 +33,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     "algorithms.apps.AlgorithmsConfig",
+    "home.apps.HomeConfig",
     "rest_framework",
+    "rest_framework.authtoken",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -135,10 +137,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "assets")
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     )
 }
+
+LOGIN_REDIRECT_URL = '/'

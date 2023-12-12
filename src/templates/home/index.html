@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load static %}
+{% load rest_framework %}
+
+<h1>Resources:</h1>
+<ul>
+    <li>
+        <a href="{% url 'algorithms:index' %}">Algorithms</a>
+    </li>
+</ul>
+<form id="logout-form" method="post" action="{% url 'accounts:logout' %}">
+    {% csrf_token %}
+    <button type="submit">{% translate "Log out" %}</button>
+  </form>
