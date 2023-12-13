@@ -26,7 +26,6 @@ class AlgorithmViewSet(viewsets.ModelViewSet):
     serializer_class = AlgorithmSerializer
 
     def get_queryset(self):
-        print(self.request.user)
         return Algorithm.objects.filter(owner_id=self.request.user.id).order_by('-creation_date')
 
 class Index(APIView):
