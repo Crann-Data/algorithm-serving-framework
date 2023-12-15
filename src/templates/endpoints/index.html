@@ -1,14 +1,18 @@
-<h1>Endpoints:</h1>
+{% extends "base.html" %}
 
-<p><a href="{% url 'endpoints:endpoint_view_set-list' %}">View all</a></p>
+{% block content %}
+    <h1>Endpoints:</h1>
+
+    <p><a href="{% url 'endpoints:endpoint_view_set-list' %}">View all</a></p>
 
 
-{% if latest_endpoints_list %}
-    <ul>
-    {% for endpoint in latest_endpoints_list %}
-        <li>{{ endpoint.name }} {{ endpoint.creation_date }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No endpoints are available.</p>
-{% endif %}
+    {% if latest_endpoints_list %}
+        <ul>
+        {% for endpoint in latest_endpoints_list %}
+            <li>{{ endpoint.name }} {{ endpoint.creation_date }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No endpoints are available.</p>
+    {% endif %}
+{% endblock content %}

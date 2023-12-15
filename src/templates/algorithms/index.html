@@ -1,22 +1,26 @@
-<h1>Algorithms</h1>
-<form enctype="multipart/form-data" action="{% url 'algorithms:upload_algorithm' %}" method="post">
-    {% csrf_token %}
-    <fieldset>
-        <legend><h3>Upload new algorithm</h3></legend>
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-        <input type="file" name="file" id="file">
-    </fieldset>
-    <input type="submit" value="Upload">
-    </form>
-    <p><a href="{% url 'algorithms:algorithm_view_set-list' %}">View all</a></p>
+{% extends "base.html" %}
 
-<h2>Available for download:</h2>
-{% if latest_algorithms_list %}
-    <ul>
-    {% for algorithm in latest_algorithms_list %}
-        <li><a href="{% url 'algorithms:get_algo_details' algorithm.id %}">{{ algorithm.name }} {{ algorithm.creation_date }}</a> --- <a href="{% url 'algorithms:download_algorithm' algorithm.id %}">Download</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No algorithms are available.</p>
-{% endif %}
+{% block content %}
+    <h1>Algorithms</h1>
+    <form enctype="multipart/form-data" action="{% url 'algorithms:upload_algorithm' %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend><h3>Upload new algorithm</h3></legend>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <input type="file" name="file" id="file">
+        </fieldset>
+        <input type="submit" value="Upload">
+        </form>
+        <p><a href="{% url 'algorithms:algorithm_view_set-list' %}">View all</a></p>
+
+    <h2>Available for download:</h2>
+    {% if latest_algorithms_list %}
+        <ul>
+        {% for algorithm in latest_algorithms_list %}
+            <li><a href="{% url 'algorithms:get_algo_details' algorithm.id %}">{{ algorithm.name }} {{ algorithm.creation_date }}</a> --- <a href="{% url 'algorithms:download_algorithm' algorithm.id %}">Download</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No algorithms are available.</p>
+    {% endif %}
+{% endblock content %}

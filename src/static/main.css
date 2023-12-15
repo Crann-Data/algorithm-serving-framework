@@ -1,0 +1,15 @@
+.main-content {
+    background-color: rgb(255, 255, 255);
+    margin: auto;
+    width: 70%;
+    border: rgb(175, 175, 175);
+    border-style: none solid none solid;
+    flex: 1 1 auto;
+    padding: 20px;
+}
+body {
+    background-color: rgb(94, 177, 249);
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
