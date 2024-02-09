@@ -7,14 +7,14 @@ This project's goal is to offer a reusable framework for deploying machine learn
 - Allow user to create endpoint, and expose this on the server
 - Allow user to make REST based inference calls to the model bound to this endpoint
 - Return the reponses outwards to the user
-- Extend and document CLI comptability for CI/CD integration
+- Extend and document CLI compatibility for CI/CD integration
 
 ### Nice to have's:
 - Monitoring and usage metrics
 - Return responses to alternative locations (MQTT, endpoint, or DB)
 - Accept any model format and convert to ONNX
 
-## usfeul cURLs
+## Usfeul cURLs
 
 
 ```bash
@@ -54,7 +54,3 @@ PGSERVICEFILE=.pg_service.conf python manage.py runserver
 > ```bash
 >export PGSERVICEFILE=.pg_service.conf 
 >```
-
-```python
-In [1]: from algorithms.models import Algorithm
-```
