@@ -42,15 +42,29 @@ docker run --name testing-postgres -e POSTGRES_PASSWORD=password -p 5432:5432 --
 createdb -h localhost -p 5432 -U postgres algorithms
 ```
 
+>```bash
+>chmod 0600 .my_pgpass
+>```
+
 ```bash
-chmod 0600 .my_pgpass
+PGSERVICEFILE=.pg_service.conf python manage.py migrate
 ```
+
+```bash
+PGSERVICEFILE=.pg_service.conf python manage.py createsuperuser
+> Username (leave blank to use ''): 
+> Email address: 
+> Password: 
+> Password (again): 
+> Superuser created successfully.
+```
+
 
 ```bash
 PGSERVICEFILE=.pg_service.conf python manage.py runserver
 ```
 
-> export ENV for session usage
+>export ENV for session usage
 > ```bash
 >export PGSERVICEFILE=.pg_service.conf 
 >```
