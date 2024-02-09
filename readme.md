@@ -1,4 +1,18 @@
+# Algorithm Serving Framework - Version 0
 
+This project's goal is to offer a reusable framework for deploying machine learning algorithms. The finished project should allow a user to upload, manage, deploy, and monitor a machine learning algorithm. The chosen model format is ONNX, other compatibilities are welcome.
+
+## Key properties
+- Receive ONNX file from user to create a model
+- Allow user to create endpoint, and expose this on the server
+- Allow user to make REST based inference calls to the model bound to this endpoint
+- Return the reponses outwards to the user
+- Extend and document CLI comptability for CI/CD integration
+
+### Nice to have's:
+- Monitoring and usage metrics
+- Return responses to alternative locations (MQTT, endpoint, or DB)
+- Accept any model format and convert to ONNX
 
 ## usfeul cURLs
 
