@@ -51,6 +51,10 @@ PGSERVICEFILE=.pg_service.conf python manage.py migrate
 ```
 
 ```bash
+PGSERVICEFILE=.pg_service.conf python manage.py makemigrations
+```
+
+```bash
 PGSERVICEFILE=.pg_service.conf python manage.py createsuperuser
 > Username (leave blank to use ''): 
 > Email address: 

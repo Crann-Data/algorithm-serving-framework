@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.core import validators
 from django.db import models
+from algorithms.models import Algorithm
 
 
 class URIPathField(models.CharField):
-    default_validators = [validators.RegexValidator("^((/[A-Za-z0-9]+)+)/$")]
+    default_validators = [validators.RegexValidator("^\/([A-Za-z0-9]+((\/[A-Za-z0-9]+)?)+)$")]
     description = "A URI path component"
 
     def __init__(self, *args, **kwargs):
@@ -22,6 +23,7 @@ class Endpoint(models.Model):
     name = models.CharField(max_length=255)
     creation_date = models.DateTimeField("date created")
     path = URIPathField()
+    algorithm = models.ForeignKey(Algorithm, default=None, on_delete=models.SET_DEFAULT)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, default='1', on_delete=models.CASCADE)
 
     def __str__(self):

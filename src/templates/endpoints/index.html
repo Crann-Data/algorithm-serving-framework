@@ -1,6 +1,32 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h1>Endpoints</h1>
+    <form enctype="multipart/form-data" action="{% url 'endpoints:create_endpoint' %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend><p>Endpoint name</p></legend>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <input type="text" name="name" id="name">
+        </fieldset>
+        <fieldset>
+            <legend><p>Endpoint path</p></legend>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <input type="text" name="path" id="path">
+        </fieldset>
+        <fieldset>
+            <legend><p>Connected Algorithm</p></legend>
+                <select name="algorithm" id="algorithm">
+                    <option value="">---------</option>
+                    {% for algorithm in algorithms_list %}
+                        <option value="{{ algorithm.pk }}">{{ algorithm.name }}</option>
+                    {% endfor %}
+                </select>
+        </fieldset>
+        
+        <input type="submit" value="Create">
+        </form>
+
     <h1>Endpoints:</h1>
 
     <p><a href="{% url 'endpoints:endpoint_view_set-list' %}">View all</a></p>
@@ -9,7 +35,7 @@
     {% if latest_endpoints_list %}
         <ul>
         {% for endpoint in latest_endpoints_list %}
-            <li>{{ endpoint.name }} {{ endpoint.creation_date }}</li>
+            <li>{{ endpoint.name }} {{ endpoint.creation_date }} {{ endpoint.algorithm }}</li>
         {% endfor %}
         </ul>
     {% else %}
