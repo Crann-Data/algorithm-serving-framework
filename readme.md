@@ -72,3 +72,16 @@ PGSERVICEFILE=.pg_service.conf python manage.py runserver
 > ```bash
 >export PGSERVICEFILE=.pg_service.conf 
 >```
+
+
+```bash
+docker run --name algorithmServing-celery-redis -p 6379:6379 --restart unless-stopped -d redis
+```
+
+```bash
+python -m celery -A algorithmServing worker
+```
+
+```bash
+celery --broker=redis://localhost:6379/0 flower
+```

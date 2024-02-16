@@ -8,3 +8,6 @@ numpy
 onnx
 onnxruntime
 pillow
+
+celery[redis]
+flower

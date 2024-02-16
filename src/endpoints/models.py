@@ -5,6 +5,10 @@ from django.dispatch import receiver
 
 from algorithms.models import Algorithm
 
+from algorithmServing.celery import debug_task
+
+from endpoints.tasks import create_endpoint, delete_endpoint
+from algorithmServing.celery import debug_task
 
 class URIPathField(models.CharField):
     default_validators = [validators.RegexValidator("^\/([A-Za-z0-9]+((\/[A-Za-z0-9]+)?)+)$")]
@@ -35,8 +39,10 @@ class Endpoint(models.Model):
 @receiver(models.signals.post_save, sender=Endpoint)
 def execute_after_save(sender, instance, created, *args, **kwargs):
     if created:
-        print(f"I was born!!! {instance}")
+        create_endpoint.delay(instance.name, instance.path, instance.algorithm.name)
+        print(f"I was born!!! {instance.name}")
 
 @receiver(models.signals.post_delete, sender=Endpoint)
 def execute_after_delete(sender, instance, *args, **kwargs):
+    delete_endpoint.delay(instance.name, instance.path, instance.algorithm.name)
     print(f"I was murdered!!! {instance}")
