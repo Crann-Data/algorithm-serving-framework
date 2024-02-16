@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.core import validators
 from django.db import models
+from django.dispatch import receiver
+
 from algorithms.models import Algorithm
 
 
@@ -28,3 +30,13 @@ class Endpoint(models.Model):
 
     def __str__(self):
         return self.name
+
+
+@receiver(models.signals.post_save, sender=Endpoint)
+def execute_after_save(sender, instance, created, *args, **kwargs):
+    if created:
+        print(f"I was born!!! {instance}")
+
+@receiver(models.signals.post_delete, sender=Endpoint)
+def execute_after_delete(sender, instance, *args, **kwargs):
+    print(f"I was murdered!!! {instance}")
