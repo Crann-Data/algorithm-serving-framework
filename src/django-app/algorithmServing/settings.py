@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "algorithms.apps.AlgorithmsConfig",
     "endpoints",
+    "deploymentNodes",
     "home.apps.HomeConfig",
     "rest_framework",
     "rest_framework.authtoken",

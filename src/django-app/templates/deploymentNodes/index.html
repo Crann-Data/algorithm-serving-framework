@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>DeploymentNodes:</h1>
+    <!-- <form enctype="multipart/form-data" action="{% url 'endpoints:create_endpoint' %}" method="post">
+        {% csrf_token %}
+        <fieldset>
+            <legend><p>Deployment name</p></legend>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            <input type="text" name="name" id="name">
+        </fieldset>
+        <fieldset>
+            <legend><p>Connected Algorithm</p></legend>
+                <select name="algorithm" id="algorithm">
+                    <option value="">---------</option>
+                    {% for algorithm in algorithms_list %}
+                        <option value="{{ algorithm.pk }}">{{ algorithm.name }}</option>
+                    {% endfor %}
+                </select>
+        </fieldset>
+        
+        <input type="submit" value="Create">
+        </form> -->
+
+    <p><a href="{% url 'deploymentNodes:deploymentNodes_view_set-list' %}">View all</a></p>
+
+
+    {% if deployment_node_list %}
+        <ul>
+        {% for deploymentNode in deployment_node_list %}
+            <li>{{ deploymentNode.name }} {{ deploymentNode.creation_date }} 
+                <!-- <form method="post" action="/endpoints/delete_endpoint/{{ endpoint.pk }}">{% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form> -->
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No deploymentNodes are available.</p>
+    {% endif %}
+{% endblock content %}
