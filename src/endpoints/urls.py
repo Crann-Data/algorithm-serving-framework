@@ -10,5 +10,6 @@ app_name = "endpoints"
 urlpatterns = [
     path("", views.Index.as_view(), name="index"),
     path("create_endpoint/", views.CreateEndpoint.as_view(), name="create_endpoint"),
+    path("delete_endpoint/<int:pk>", views.EndpointDeleteView.as_view(), name="delete_endpoint"),
     path("api/", include(router.urls)),
 ]

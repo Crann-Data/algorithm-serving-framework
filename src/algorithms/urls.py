@@ -12,5 +12,6 @@ urlpatterns = [
     path("<int:algorithm_id>/", views.AlgoDetails.as_view(), name="get_algo_details"),
     path("download/<int:algorithm_id>/", views.DownloadAlgorithm.as_view(), name="download_algorithm"),
     path("upload/", views.UploadAlgorithm.as_view(), name="upload_algorithm"),
+    path("delete_algorithm/<int:pk>", views.AlgorithmDeleteView.as_view(), name="delete_algorithm"),
     path("api/", include(router.urls)),
 ]

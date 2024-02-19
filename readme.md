@@ -47,12 +47,12 @@ createdb -h localhost -p 5432 -U postgres algorithms
 >```
 
 ```bash
+PGSERVICEFILE=.pg_service.conf python manage.py makemigrations
+```
+```bash
 PGSERVICEFILE=.pg_service.conf python manage.py migrate
 ```
 
-```bash
-PGSERVICEFILE=.pg_service.conf python manage.py makemigrations
-```
 
 ```bash
 PGSERVICEFILE=.pg_service.conf python manage.py createsuperuser

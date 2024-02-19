@@ -17,7 +17,12 @@
     {% if latest_algorithms_list %}
         <ul>
         {% for algorithm in latest_algorithms_list %}
-            <li><a href="{% url 'algorithms:get_algo_details' algorithm.id %}">{{ algorithm.name }} {{ algorithm.creation_date }}</a> --- <a href="{% url 'algorithms:download_algorithm' algorithm.id %}">Download</a></li>
+            <li><a href="{% url 'algorithms:get_algo_details' algorithm.id %}">{{ algorithm.name }} {{ algorithm.creation_date }}</a> 
+                --- <a href="{% url 'algorithms:download_algorithm' algorithm.id %}">Download</a>
+                <form method="post" action="/algorithms/delete_algorithm/{{ algorithm.pk }}">{% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </li>
         {% endfor %}
         </ul>
     {% else %}

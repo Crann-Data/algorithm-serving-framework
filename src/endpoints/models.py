@@ -24,12 +24,15 @@ class URIPathField(models.CharField):
             del kwargs["max_length"]
         return name, path, args, kwargs
 
-# Create your models here.
+
 class Endpoint(models.Model):
+    STATUS_CHOICES = {"creating": "creating", "active": "active", "terminating": "terminating"}
+    
     name = models.CharField(max_length=255)
     creation_date = models.DateTimeField("date created")
+    status = models.CharField(max_length=32, choices=STATUS_CHOICES, default="creating")
     path = URIPathField()
-    algorithm = models.ForeignKey(Algorithm, default=None, on_delete=models.SET_DEFAULT)
+    algorithm = models.ForeignKey(Algorithm, default=None, on_delete=models.CASCADE)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, default='1', on_delete=models.CASCADE)
 
     def __str__(self):
@@ -39,10 +42,10 @@ class Endpoint(models.Model):
 @receiver(models.signals.post_save, sender=Endpoint)
 def execute_after_save(sender, instance, created, *args, **kwargs):
     if created:
-        create_endpoint.delay(instance.name, instance.path, instance.algorithm.name)
+        create_endpoint.delay(instance.pk, instance.algorithm.pk)
         print(f"I was born!!! {instance.name}")
 
 @receiver(models.signals.post_delete, sender=Endpoint)
 def execute_after_delete(sender, instance, *args, **kwargs):
-    delete_endpoint.delay(instance.name, instance.path, instance.algorithm.name)
+    delete_endpoint.delay(instance.name, instance.path, instance.algorithm.pk)
     print(f"I was murdered!!! {instance}")

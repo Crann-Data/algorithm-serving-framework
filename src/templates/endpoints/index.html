@@ -35,7 +35,11 @@
     {% if latest_endpoints_list %}
         <ul>
         {% for endpoint in latest_endpoints_list %}
-            <li>{{ endpoint.name }} {{ endpoint.creation_date }} {{ endpoint.algorithm }}</li>
+            <li>{{ endpoint.name }} {{ endpoint.creation_date }} {{ endpoint.algorithm }} -- STATUS:  {{ endpoint.status }}
+                <form method="post" action="/endpoints/delete_endpoint/{{ endpoint.pk }}">{% csrf_token %}
+                    <input type="submit" value="Delete">
+                </form>
+            </li>
         {% endfor %}
         </ul>
     {% else %}

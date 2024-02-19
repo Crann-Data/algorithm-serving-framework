@@ -1,10 +1,11 @@
 from django.contrib.auth.models import User
 from django.core.files import File
-from django.http import (FileResponse, Http404, HttpResponse,
-                         HttpResponseBadRequest, HttpResponseRedirect)
+from django.http import (FileResponse, HttpResponse)
 from django.shortcuts import render
-from django.urls import reverse
 from django.utils import timezone
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
+
 from rest_framework import status, viewsets
 from rest_framework.authentication import (SessionAuthentication,
                                            TokenAuthentication)
@@ -84,3 +85,14 @@ class DownloadAlgorithm(APIView):
             return HttpResponse("unauthorised", status=status.HTTP_401_UNAUTHORIZED)
         file = open(algo.algorithm_file.path, mode="rb")
         return FileResponse(file, as_attachment=True, filename=algo.algorithm_file.name)
+    
+
+class AlgorithmDeleteView(DeleteView):
+    model = Algorithm
+    success_url = reverse_lazy('algorithms:index')
+
+    def post(self, request, pk, *args, **kwargs):
+        obj = self.get_object()
+        if not obj.owner == self.request.user:
+            return self.success_url
+        return super().post(request, *args, **kwargs)
