@@ -26,7 +26,11 @@ class URIPathField(models.CharField):
 
 
 class Endpoint(models.Model):
-    STATUS_CHOICES = {"creating": "creating", "active": "active", "terminating": "terminating"}
+    STATUS_CHOICES = [
+        ("creating", "creating"),
+        ("active", "active"),
+        ("terminating", "terminating")
+    ]
     
     name = models.CharField(max_length=255)
     creation_date = models.DateTimeField("date created")
